@@ -14,28 +14,38 @@ set (BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
 # 1. Make shared library
 # 2. Make Executable
 
-file(GLOB shared_src lib/ShitTalker/src/*.cpp)
+# Dependencies
+add_subdirectory(submodules/pybind11)
 
-add_library(shitTalker ${shared_src})
+# My source code
+add_subdirectory(lib)
+add_subdirectory(src)
+add_subdirectory(bindings/shitTalker)
 
-target_include_directories(shitTalker
-    PUBLIC lib/ShitTalker/include
-)
+# file(GLOB shared_src lib/ShitTalker/src/*.cpp)
+
+# add_library(shitTalker SHARED ${shared_src})
+
+# target_include_directories(shitTalker
+#     PUBLIC lib/ShitTalker/include
+# )
 
 
-file(GLOB DUMMY_SRC src/*.cpp)
+# file(GLOB DUMMY_SRC src/*.cpp)
 
-add_executable(dummy_exc ${DUMMY_SRC})
+# add_executable(dummy_exc ${DUMMY_SRC})
 
-target_include_directories(dummy_exc
-    PUBLIC lib/ShitTalker/include
-)
+# target_include_directories(dummy_exc
+#     PUBLIC lib/ShitTalker/include
+# )
 
-set_target_properties(dummy_exc
-    PROPERTIES 
-    RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR}
-)
+# set_target_properties(dummy_exc
+#     PROPERTIES 
+#     RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR}
+# )
 
-target_link_libraries(dummy_exc
-    PUBLIC shitTalker
-)
+# target_link_libraries(dummy_exc
+#     PUBLIC shitTalker
+# )
+
+# add_subdirectory(bindings/shitTalker)
